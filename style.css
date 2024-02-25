@@ -108,3 +108,11 @@ body {
     height:100px;
   }
 }
+.date-container {
+  font-size: 20px;
+  color: #0f0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position:relative;
+  top:15px;
+}
