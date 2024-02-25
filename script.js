@@ -71,17 +71,3 @@ function typeQuote() {
 }
 
 typeQuote();
-function updatePieChart2(now) {
-  const totalSecondsInDay = 24 * 60 * 60;
-  const secondsPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-  const percentage = ((totalSecondsInDay - secondsPassed) / totalSecondsInDay) * 100;
-
-  const progressCircle = document.querySelector('.progress-circle');
-  progressCircle.style.strokeDasharray = `${percentage * 2.5}, 251`;
-
-  const timeLeftText = document.getElementById('time-left-text');
-  timeLeftText.textContent = `${percentage.toFixed(2)}%`;
-}
-
-setInterval(updateClock, 1000);
-updateClock();
