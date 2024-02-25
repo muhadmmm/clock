@@ -16,8 +16,8 @@ body {
 
 .clock {
   position: relative;
-  width: 200px; /* Decrease the clock size */
-  height: 200px; /* Decrease the clock size */
+  width: 100px; /* Decrease the clock size */
+  height: 100px; /* Decrease the clock size */
   border: 2px solid #0f0;
   border-radius: 50%;
   margin: 0 10px; /* Add margin between clocks */
@@ -34,6 +34,7 @@ body {
   top: 50%;
   left: 50%;
   transform-origin: bottom center ;
+
 }
 
 .hour-hand {
@@ -52,12 +53,12 @@ body {
   position: absolute;
   top: 10px;
   color: #0f0;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .pie-chart-container {
   margin-top: 20px;
   position: relative;
-  top:20px;
 }
 
 .pie-chart {
@@ -66,7 +67,6 @@ body {
   border: 2px solid #0f0;
   border-radius: 10px;
   position: relative;
-  top:20px;
 }
 
 .progress {
@@ -77,19 +77,19 @@ body {
 
 .percentage {
   position: absolute;
-  bottom: -20px;
+  bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
   color: #0f0;
   font-family: 'Times New Roman', Times, serif;
 }
 .quote-container {
-  margin-top: 40px;
-  font-size: 25px;
+  margin-top: 20px;
+  font-size: 20px;
   color: #0f0;
+  position: relative ;
+  top: 30px;
   font-family: 'Times New Roman',Times,serif;
-  position:relative;
-  top:20px;
 }
 
 #cursor {
@@ -102,17 +102,11 @@ body {
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
-@media screen and (max-width: 768px) {
-  .clock{
-    width:100px;
-    height:100px;
-  }
-}
 .date-container {
-  font-size: 20px;
-  color: #0f0;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  position:relative;
-  top:15px;
-}
+    font-size: 20px;
+    color: #0f0;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    text-align: center;
+    position: relative;
+    top:15px;
+  }
