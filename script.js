@@ -59,7 +59,7 @@ function typeQuote() {
 
   document.getElementById('quote-text').textContent = quote.substring(0, charIndex);
 
-  setTimeout(typeQuote, 200);
+  setTimeout(typeQuote, 100);
 
   if (charIndex === quote.length) {
     charIndex = 0;
