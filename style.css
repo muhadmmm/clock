@@ -1,2 +1,101 @@
+body {
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
 
-yfuyf
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock {
+  position: relative;
+  width: 100px; /* Decrease the clock size */
+  height: 100px; /* Decrease the clock size */
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  margin: 0 10px; /* Add margin between clocks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-hand {
+  position: absolute;
+  width: 2px;
+  background-color: #0f0;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center ;
+}
+
+.hour-hand {
+  height: 50%; /* Adjust needle height */
+}
+
+.minute-hand {
+  height: 50%; /* Adjust needle height */
+}
+
+.second-hand {
+  height: 50%; /* Adjust needle height */
+}
+
+.time {
+  position: absolute;
+  top: 10px;
+  color: #0f0;
+}
+
+.pie-chart-container {
+  margin-top: 20px;
+  position: relative;
+}
+
+.pie-chart {
+  width: 300px;
+  height: 20px;
+  border: 2px solid #0f0;
+  border-radius: 10px;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  background-color: #0f0;
+  border-radius: 8px;
+}
+
+.percentage {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  font-family: 'Times New Roman', Times, serif;
+}
+.quote-container {
+  margin-top: 40px;
+  font-size: 18px;
+  color: #0f0;
+  font-family: 'Times New Roman',Times,serif;
+}
+
+#cursor {
+  display: inline-block;
+  animation: blink-animation 0.7s infinite;
+}
+
+@keyframes blink-animation {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
