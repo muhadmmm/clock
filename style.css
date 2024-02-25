@@ -110,3 +110,9 @@ body {
     position: relative;
     top:15px;
   }
+@media screen and (max-width: 720px){
+    .clock{
+    height: 100px;
+    width: 100px;
+  }
+  }
