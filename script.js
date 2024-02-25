@@ -28,6 +28,15 @@ function updateClockHand(clockId, value, maxValue) {
   }
 }
 
+function updateDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const dateString = `${year}/${month}/${day}`;
+  document.getElementById('date-container').textContent = dateString;
+}
+
 function updatePieChart(now) {
   const daysInYear = 365;
   const passedDays = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
@@ -39,6 +48,15 @@ function updatePieChart(now) {
   const percentageElement = document.querySelector('.percentage');
   percentageElement.textContent = `${percentage.toFixed(2)}%`;
 }
+
+setInterval(function() {
+  const now = new Date();
+  updateDate(now);
+  updatePieChart(now);
+}, 1000);
+
+updateDate(new Date());
+updatePieChart(new Date());
 
 setInterval(updateClock, 1000);
 updateClock();
