@@ -12,12 +12,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  top: -50px;
+  margin-top: 50px;
 }
 
 .clock {
   position: relative;
-  width: 100px; /* Decrease the clock size */
-  height: 100px; /* Decrease the clock size */
+  width: 200px; /* Decrease the clock size */
+  height: 200px; /* Decrease the clock size */
   border: 2px solid #0f0;
   border-radius: 50%;
   margin: 0 10px; /* Add margin between clocks */
@@ -59,6 +62,8 @@ body {
 .pie-chart-container {
   margin-top: 20px;
   position: relative;
+  bottom:30px;
+  text-align: center;
 }
 
 .pie-chart {
@@ -67,6 +72,7 @@ body {
   border: 2px solid #0f0;
   border-radius: 10px;
   position: relative;
+  bottom :30px;
 }
 
 .progress {
@@ -82,13 +88,15 @@ body {
   transform: translateX(-50%);
   color: #0f0;
   font-family: 'Times New Roman', Times, serif;
+  position:relative;
+  top: -30px;
 }
 .quote-container {
   margin-top: 20px;
   font-size: 20px;
   color: #0f0;
   position: relative ;
-  top: 30px;
+  top: -50px;
   font-family: 'Times New Roman',Times,serif;
 }
 
@@ -108,7 +116,7 @@ body {
     font-family: 'Times New Roman', Times, serif, sans-serif;
     text-align: center;
     position: relative;
-    top:15px;
+    top:-40px;
   }
 @media screen and (max-width: 720px){
     .clock{
@@ -119,6 +127,22 @@ body {
 .cmatrix{
   border: 2px solid #0f0;
   height:200px;
-  width:300px;
-  overflow:hidden;
+  width:350px;
+  overflow: hidden;
+  position: relative;
+  top:-30px;
+  margin-top: -30px;
+  
+}
+.quote{
+  height: 60px;
+  width: 300px;
+  overflow: inherit;
+}
+.name{
+  color: red;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  position: relative;
+  top: -50px;
 }
