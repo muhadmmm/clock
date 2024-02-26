@@ -1,81 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hacker Clock Wallpaper</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="clock-container">
-    <div class="clock" id="hour-clock">
-      <div class="time"></div>
-      <div class="hour-hand clock-hand"></div>
-    </div>
-    <div class="clock" id="minute-clock">
-      <div class="time"></div>
-      <div class="minute-hand clock-hand"></div>
-    </div>
-    <div class="clock" id="second-clock">
-      <div class="time"></div>
-      <div class="second-hand clock-hand"></div>
-    </div>
-  </div>
-  <div class="date-container" id="date-container"></div>
-  <div class="pie-chart-container">
-    <div class="pie-chart">
-      <div class="progress"></div>
-    </div>
-    <div class="percentage">0%</div>
-  </div>
-  <div class="quote-container">
-    <span id="quote-text"></span><span id="cursor">|</span>
-  </div>
-  <div class="cmatrix">
-  <canvas></canvas>
+body {
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
 
-  <script>
-    var canvas = document.querySelector('canvas'),
-        ctx = canvas.getContext('2d');
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -50px;
+  margin-top: 50px;
+}
 
-    // Setting the width and height of the canvas
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+.clock {
+  position: relative;
+  width: 200px; /* Decrease the clock size */
+  height: 200px; /* Decrease the clock size */
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  margin: 0 10px; /* Add margin between clocks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    // Setting up the letters
-    var letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
-    letters = letters.split('');
+.clock-hand {
+  position: absolute;
+  width: 2px;
+  background-color: #0f0;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center ;
 
-    // Setting up the columns
-    var fontSize = 10,
-        columns = canvas.width / fontSize;
+}
 
-    // Setting up the drops
-    var drops = [];
-    for (var i = 0; i < columns; i++) {
-      drops[i] = 1;
-    }
+.hour-hand {
+  height: 50%; /* Adjust needle height */
+}
 
-    // Setting up the draw function
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      for (var i = 0; i < drops.length; i++) {
-        var text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillStyle = '#0f0';
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        drops[i]++;
-        if (drops[i] * fontSize > canvas.height && Math.random() > .95) {
-          drops[i] = 0;
-        }
-      }
-    }
+.minute-hand {
+  height: 50%; /* Adjust needle height */
+}
 
-    // Loop the animation
-    setInterval(draw, 40);
-  </script>
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>
+.second-hand {
+  height: 50%; /* Adjust needle height */
+}
 
+.time {
+  position: absolute;
+  top: 10px;
+  color: #0f0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.pie-chart-container {
+  margin-top: 20px;
+  position: relative;
+  bottom:30px;
+  text-align: center;
+}
+
+.pie-chart {
+  width: 300px;
+  height: 20px;
+  border: 2px solid #0f0;
+  border-radius: 10px;
+  position: relative;
+  bottom :30px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #0f0;
+  border-radius: 8px;
+}
+
+.percentage {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  font-family: 'Times New Roman', Times, serif;
+  position:relative;
+  top: -30px;
+}
+.quote-container {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #0f0;
+  position: relative ;
+  top: -50px;
+  font-family: 'Times New Roman',Times,serif;
+}
+
+#cursor {
+  display: inline-block;
+  animation: blink-animation 0.7s infinite;
+}
+
+@keyframes blink-animation {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.date-container {
+    font-size: 20px;
+    color: #0f0;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    text-align: center;
+    position: relative;
+    top:-40px;
+  }
+@media screen and (max-width: 720px){
+    .clock{
+    height: 100px;
+    width: 100px;
+  }
+  }
+.cmatrix{
+  border: 2px solid #0f0;
+  height:200px;
+  width:350px;
+  overflow: hidden;
+  position: relative;
+  top:-30px;
+  margin-top: -30px;
+  
+}
+.quote{
+  height: 60px;
+  width: 300px;
+  overflow: inherit;
+}
+.name{
+  color: red;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  position: relative;
+  top: -50px;
+}
