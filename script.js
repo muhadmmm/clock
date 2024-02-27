@@ -61,11 +61,7 @@ updatePieChart(new Date());
 setInterval(updateClock, 1000);
 updateClock();
 const quotes = [
-  "The only way to do great work is to love what you do.",
-  "Innovation distinguishes between a leader and a follower.",
-  "Your time is limited, don't waste it living someone else's life.",
-  "Stay hungry, stay foolish.",
-  "The people who are crazy enough to think they can change the world are the ones who do."
+  "progressing.........",
 ];
 
 let quoteIndex = 0;
