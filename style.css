@@ -15,8 +15,6 @@ body {
   position: relative;
   top: -50px;
   margin-top: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .clock {
@@ -154,6 +152,8 @@ body {
   border: 2px solid green;
   background-color: black;
   position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .heartbeat:after {
   content: "";
