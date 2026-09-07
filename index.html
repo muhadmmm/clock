@@ -1,93 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hacker Clock Wallpaper</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505">
+<title>Hacker Clock — v2.0</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="heartbeat">
-  <svg height="100%" width="100%">
-   <polyline fill="none" stroke="#0f0" stroke-width="3" points="0,45 40,45 44,31 49,44 55,46 61,52 83,8 90,90 100,44 115,44 125,40 139,45 140,45
-                                         150,45 180,65 194,31 199,44 205,46 211,52 233,8 240,90 250,44 265,44 275,10 290,45 300,45 
-                                         320,45 360,65 394,31 399,44 405,46 411,52 433,8 440,90 450,44 465,44 475,40 490,45 500,45 ">
- </svg>
-</div>
-  <div class="clock-container">
-    <div class="clock" id="hour-clock">
-      <div class="time"></div>
-      <div class="hour-hand clock-hand"></div>
-    </div>
-    <div class="clock" id="minute-clock">
-      <div class="time"></div>
-      <div class="minute-hand clock-hand"></div>
-    </div>
-    <div class="clock" id="second-clock">
-      <div class="time"></div>
-      <div class="second-hand clock-hand"></div>
-    </div>
-  </div>
-  <div class="date-container" id="date-container"></div>
-  <div class="pie-chart-container">
-    <div class="pie-chart">
-      <div class="progress"></div>
-    </div>
-    <div class="percentage">0%</div>
-  </div>
-  
-  <div class="quote-container">
-    <div class="quote">
-    <span id="quote-text"></span><span id="cursor">|</span>
-  </div>
-  </div>
-  <p class="name">DECAFEMTO-369</p>
-  <div class="cmatrix">
-    
-  <canvas></canvas>
-  <script>
-    var canvas = document.querySelector('canvas'),
-        ctx = canvas.getContext('2d');
-
-    // Setting the width and height of the canvas
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Setting up the letters
-    var letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
-    letters = letters.split('');
-
-    // Setting up the columns
-    var fontSize = 10,
-        columns = canvas.width / fontSize;
-
-    // Setting up the drops
-    var drops = [];
-    for (var i = 0; i < columns; i++) {
-      drops[i] = 1;
-    }
-
-    // Setting up the draw function
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      for (var i = 0; i < drops.length; i++) {
-        var text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillStyle = '#0f0';
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        drops[i]++;
-        if (drops[i] * fontSize > canvas.height && Math.random() > .95) {
-          drops[i] = 0;
-        }
-      }
-    }
-
-    // Loop the animation
-    setInterval(draw, 40);
-  </script>
-  </div>
-  
-  <script src="script.js"></script>
-</body>
-</html>
-
+<div class="scanlines"></div>
+<header><div><span class="status-dot"></span> CLOCK // SYSTEM ONLINE</div><button id="settingsBtn" aria-label="Settings">⚙</button></header>
+<main>
+<section class="hero panel"><div class="eyebrow">LOCAL TIME // <span id="timezone">--</span></div><div id="digitalClock">00:00:00</div><div id="ampm">--</div><div id="date">----</div></section>
+<section class="clocks" aria-label="World clocks">
+<article class="clock-card"><b>INDIA</b><span id="indiaTime">--:--:--</span><small>Asia/Kolkata</small></article>
+<article class="clock-card"><b>UTC</b><span id="utcTime">--:--:--</span><small>UTC</small></article>
+<article class="clock-card"><b>NEW YORK</b><span id="nyTime">--:--:--</span><small>America/New_York</small></article>
+<article class="clock-card"><b>TOKYO</b><span id="tokyoTime">--:--:--</span><small>Asia/Tokyo</small></article>
+</section>
+<section class="grid">
+<div class="panel progress-panel"><div class="section-title">TIME PROGRESS</div><div class="progress-row"><span>DAY</span><div class="bar"><i id="dayProgress"></i></div><strong id="dayPct">0%</strong></div><div class="progress-row"><span>MONTH</span><div class="bar"><i id="monthProgress"></i></div><strong id="monthPct">0%</strong></div><div class="progress-row"><span>YEAR</span><div class="bar"><i id="yearProgress"></i></div><strong id="yearPct">0%</strong></div></div>
+<div class="panel tools"><div class="section-title">TOOLS</div><div class="tool-display" id="toolDisplay">00:00:00.00</div><div class="tool-buttons"><button id="startStopwatch">START</button><button id="resetStopwatch">RESET</button></div><div class="tool-display small" id="timerDisplay">05:00</div><div class="tool-buttons"><button id="timerBtn">START 5M TIMER</button></div></div>
+</section>
+<section class="panel terminal"><div class="section-title">SYSTEM TELEMETRY</div><div class="telemetry"><span>NETWORK <b id="network">ONLINE</b></span><span>BATTERY <b id="battery">N/A</b></span><span>LANG <b id="lang">--</b></span><span>SCREEN <b id="screen">--</b></span></div></section>
+<section class="panel heartbeat"><div class="pulse-line"><svg viewBox="0 0 600 80" preserveAspectRatio="none"><polyline points="0,40 90,40 105,40 115,20 125,60 140,40 205,40 220,40 235,12 250,68 265,40 340,40 355,40 370,20 380,60 395,40 470,40 485,40 500,10 515,70 530,40 600,40"/></svg></div><div class="pulse-label">HEARTBEAT // <span>STABLE</span></div></section>
+<section class="panel quote"><span id="quoteText"></span><span class="cursor">█</span></section>
+<section class="matrix panel"><canvas id="matrix"></canvas></section>
+</main>
+<footer><span>DECAFEMTO-369</span><span>v2.0</span><button id="fullscreenBtn">FULLSCREEN</button></footer>
+<div class="modal" id="settings"><div class="modal-box"><button class="close" id="closeSettings">×</button><h2>SETTINGS</h2><label>Matrix intensity <input id="matrixRange" type="range" min="1" max="5" value="3"></label><label>12/24 hour <select id="format"><option value="24">24 HOUR</option><option value="12">12 HOUR</option></select></label><button id="themeBtn">TOGGLE GREEN / AMBER</button></div></div>
+<script src="script.js"></script>
+</body></html>
