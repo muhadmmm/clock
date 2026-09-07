@@ -1,87 +1,16 @@
-function updateClock() {
-  const now = new Date();
-  let hour = now.getHours();
-  const minute = now.getMinutes();
-  const second = now.getSeconds();
-
-  // Convert 24-hour format to 12-hour format
-  hour = hour % 12 || 12;
-
-  updateClockHand('hour-clock', hour, 12);
-  updateClockHand('minute-clock', minute, 60);
-  updateClockHand('second-clock', second, 60);
-
-  updatePieChart(now);
-}
-
-function updateClockHand(clockId, value, maxValue) {
-  const clock = document.getElementById(clockId);
-  const hand = clock.querySelector('.clock-hand');
-  const time = clock.querySelector('.time');
-  const degrees = (value / maxValue) * 360;
-  hand.style.transform = `translate(-50%, -100%) rotate(${degrees}deg)`;
-  time.textContent = value < 10 ? `0${value}` : value;
-  if (value < 10) {
-    time.textContent = `0${value}`;
-  } else {
-    time.textContent = value;
-  }
-}
-
-function updateDate() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const dateString = `${year}/${month}/${day}`;
-  document.getElementById('date-container').textContent = dateString;
-}
-
-function updatePieChart(now) {
-  const daysInYear = 365;
-  const passedDays = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-  const percentage = (passedDays / daysInYear) * 100;
-
-  const progress = document.querySelector('.progress');
-  progress.style.width = `${percentage}%`;
-
-  const percentageElement = document.querySelector('.percentage');
-  percentageElement.textContent = `${percentage.toFixed(2)}%`;
-}
-
-setInterval(function() {
-  const now = new Date();
-  updateDate(now);
-  updatePieChart(now);
-}, 1000);
-
-updateDate(new Date());
-updatePieChart(new Date());
-
-setInterval(updateClock, 1000);
-updateClock();
-const quotes = [
-  "progressing.........",
-];
-
-let quoteIndex = 0;
-let charIndex = 0;
-
-function typeQuote() {
-  const quote = quotes[quoteIndex];
-  charIndex++;
-
-  document.getElementById('quote-text').textContent = quote.substring(0, charIndex);
-
-  setTimeout(typeQuote, 100);
-
-  if (charIndex === quote.length) {
-    charIndex = 0;
-    quoteIndex++;
-    if (quoteIndex === quotes.length) {
-      quoteIndex = 0;
-    }
-  }
-}
-
-typeQuote();
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+let format24=localStorage.getItem('clockFormat')!=='12';
+const zones=[['indiaTime','Asia/Kolkata'],['utcTime','UTC'],['nyTime','America/New_York'],['tokyoTime','Asia/Tokyo']];
+function fmt(date,timeZone,withSeconds=true){return new Intl.DateTimeFormat('en-GB',{timeZone,hour:'2-digit',minute:'2-digit',second:withSeconds?'2-digit':undefined,hour12:!format24}).format(date)}
+function update(){const now=new Date();const local=Intl.DateTimeFormat().resolvedOptions().timeZone;$('timezone').textContent=local;const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds(),ms=now.getMilliseconds();$('digitalClock').textContent=formatTime(h,m,s);$('ampm').textContent=format24?'24-HOUR MODE':(h<12?'AM':'PM');$('date').textContent=new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).format(now);zones.forEach(([id,z])=>$(id).textContent=fmt(now,z));progress(now);telemetry();requestAnimationFrame(update)}
+function formatTime(h,m,s){if(format24)return `${pad(h)}:${pad(m)}:${pad(s)}`;const hh=h%12||12;return `${pad(hh)}:${pad(m)}:${pad(s)}`}
+function pct(value,total){return Math.min(100,Math.max(0,value/total*100))}
+function progress(now){const start=new Date(now.getFullYear(),now.getMonth(),now.getDate());const nextDay=new Date(start);nextDay.setDate(start.getDate()+1);const day=pct(now-start,nextDay-start);const monthStart=new Date(now.getFullYear(),now.getMonth(),1);const nextMonth=new Date(now.getFullYear(),now.getMonth()+1,1);const month=pct(now-monthStart,nextMonth-monthStart);const yearStart=new Date(now.getFullYear(),0,1);const nextYear=new Date(now.getFullYear()+1,0,1);const year=pct(now-yearStart,nextYear-yearStart);[['dayProgress','dayPct',day],['monthProgress','monthPct',month],['yearProgress','yearPct',year]].forEach(([bar,label,v])=>{$(bar).style.width=`${v}%`;$(`${label}`).textContent=`${v.toFixed(1)}%`})}
+function telemetry(){$('network').textContent=navigator.onLine?'ONLINE':'OFFLINE';$('lang').textContent=navigator.language.toUpperCase();$('screen').textContent=`${screen.width}×${screen.height}`;if(navigator.getBattery)navigator.getBattery().then(b=>$('battery').textContent=`${Math.round(b.level*100)}%${b.charging?' ⚡':''}`).catch(()=>{})}
+window.addEventListener('online',telemetry);window.addEventListener('offline',telemetry);
+let swStart=0,swElapsed=0,swRunning=false,swFrame;function renderSW(){const t=swElapsed+(swRunning?performance.now()-swStart:0);const cs=Math.floor(t/10)%100,s=Math.floor(t/1000)%60,m=Math.floor(t/60000)%60,h=Math.floor(t/3600000);$('toolDisplay').textContent=`${pad(h)}:${pad(m)}:${pad(s)}.${pad(cs)}`;if(swRunning)swFrame=requestAnimationFrame(renderSW)}$('startStopwatch').onclick=()=>{if(swRunning){swElapsed+=performance.now()-swStart;swRunning=false;cancelAnimationFrame(swFrame);$('startStopwatch').textContent='START'}else{swStart=performance.now();swRunning=true;$('startStopwatch').textContent='STOP';renderSW()}};$('resetStopwatch').onclick=()=>{swRunning=false;swElapsed=0;cancelAnimationFrame(swFrame);$('startStopwatch').textContent='START';renderSW()};renderSW();
+let timer=300,timerRunning=false,timerId;function renderTimer(){const m=Math.floor(timer/60),s=timer%60;$('timerDisplay').textContent=`${pad(m)}:${pad(s)}`};$('timerBtn').onclick=()=>{if(timerRunning){clearInterval(timerId);timerRunning=false;$('timerBtn').textContent='START 5M TIMER';return}if(timer<=0)timer=300;timerRunning=true;$('timerBtn').textContent='STOP TIMER';renderTimer();timerId=setInterval(()=>{timer--;renderTimer();if(timer<=0){clearInterval(timerId);timerRunning=false;$('timerBtn').textContent='START 5M TIMER';beep()}},1000)};function beep(){try{const c=new AudioContext(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.08;o.start();o.stop(c.currentTime+.4)}catch(e){}}
+const quotes=['TIME IS A RESOURCE. USE IT.','BUILD. BREAK. LEARN. REPEAT.','PROGRESS > PERFECTION.','SYSTEMS RUN. DREAMS EXECUTE.'];let qi=0,ci=0,typing=true;function type(){const q=quotes[qi];$('quoteText').textContent=q.slice(0,ci++);if(ci>q.length){typing=false;setTimeout(()=>{ci=0;qi=(qi+1)%quotes.length;typing=true;type()},1800);return}setTimeout(type,65)}type();
+const canvas=$('matrix'),ctx=canvas.getContext('2d');let drops=[],font=12,intensity=3;function resize(){const r=canvas.getBoundingClientRect(),d=devicePixelRatio||1;canvas.width=r.width*d;canvas.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);drops=Array(Math.ceil(r.width/font)).fill(1)}window.addEventListener('resize',resize);resize();function matrix(){const r=canvas.getBoundingClientRect();ctx.fillStyle='rgba(0,0,0,.13)';ctx.fillRect(0,0,r.width,r.height);ctx.font=`${font}px monospace`;for(let i=0;i<drops.length;i++){if(Math.random()>.18*intensity)continue;ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--green');ctx.fillText(Math.random().toString(36).slice(2,3).toUpperCase(),i*font,drops[i]*font);if(drops[i]*font>r.height&&Math.random()>.96)drops[i]=0;drops[i]++}}setInterval(matrix,55);
+$('settingsBtn').onclick=()=>$('settings').classList.add('open');$('closeSettings').onclick=()=>$('settings').classList.remove('open');$('settings').onclick=e=>{if(e.target===$('settings'))$('settings').classList.remove('open')};$('matrixRange').oninput=e=>intensity=+e.target.value;$('format').value=format24?'24':'12';$('format').onchange=e=>{format24=e.target.value==='24';localStorage.setItem('clockFormat',format24?'24':'12')};$('themeBtn').onclick=()=>document.body.classList.toggle('amber');$('fullscreenBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.();update();
