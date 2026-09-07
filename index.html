@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505">
-<title>Hacker Clock — v2.0</title><link rel="stylesheet" href="style.css">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030303"><title>Hacker Clock — v2.1 Radar</title><link rel="stylesheet" href="style.css"></head>
 <body>
 <div class="scanlines"></div>
-<header><div><span class="status-dot"></span> CLOCK // SYSTEM ONLINE</div><button id="settingsBtn" aria-label="Settings">⚙</button></header>
+<header><div><span class="status-dot"></span> CLOCK // RADAR SYSTEM ONLINE</div><button id="settingsBtn" aria-label="Settings">⚙</button></header>
 <main>
-<section class="hero panel"><div class="eyebrow">LOCAL TIME // <span id="timezone">--</span></div><div id="digitalClock">00:00:00</div><div id="ampm">--</div><div id="date">----</div></section>
-<section class="clocks" aria-label="World clocks">
-<article class="clock-card"><b>INDIA</b><span id="indiaTime">--:--:--</span><small>Asia/Kolkata</small></article>
-<article class="clock-card"><b>UTC</b><span id="utcTime">--:--:--</span><small>UTC</small></article>
-<article class="clock-card"><b>NEW YORK</b><span id="nyTime">--:--:--</span><small>America/New_York</small></article>
-<article class="clock-card"><b>TOKYO</b><span id="tokyoTime">--:--:--</span><small>Asia/Tokyo</small></article>
+<section class="radar-section panel">
+  <div class="radar-title">TIME RADAR <span id="timezone">--</span></div>
+  <div class="clock-rack">
+    <article class="radar-clock" id="hour-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="tick twelve">12</div><div class="tick three">03</div><div class="tick six">06</div><div class="tick nine">09</div><div class="radar-hand hour-hand"></div><div class="center-dot"></div><div class="dial-label">HOUR</div><div class="dial-value" id="hourValue">00</div></article>
+    <article class="radar-clock" id="minute-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="tick twelve">12</div><div class="tick three">15</div><div class="tick six">30</div><div class="tick nine">45</div><div class="radar-hand minute-hand"></div><div class="center-dot"></div><div class="dial-label">MIN</div><div class="dial-value" id="minuteValue">00</div></article>
+    <article class="radar-clock" id="second-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="tick twelve">00</div><div class="tick three">15</div><div class="tick six">30</div><div class="tick nine">45</div><div class="radar-hand second-hand"></div><div class="center-dot"></div><div class="dial-label">SEC</div><div class="dial-value" id="secondValue">00</div></article>
+  </div>
+  <div class="digital-readout"><span id="digitalClock">00:00:00</span><span id="ampm">24-HOUR</span></div>
+  <div id="date">----</div>
 </section>
-<section class="grid">
+<section class="right-stack">
+<section class="clocks" aria-label="World clocks"><article class="clock-card"><b>INDIA</b><span id="indiaTime">--:--:--</span><small>Asia/Kolkata</small></article><article class="clock-card"><b>UTC</b><span id="utcTime">--:--:--</span><small>UTC</small></article><article class="clock-card"><b>NEW YORK</b><span id="nyTime">--:--:--</span><small>America/New_York</small></article><article class="clock-card"><b>TOKYO</b><span id="tokyoTime">--:--:--</span><small>Asia/Tokyo</small></article></section>
 <div class="panel progress-panel"><div class="section-title">TIME PROGRESS</div><div class="progress-row"><span>DAY</span><div class="bar"><i id="dayProgress"></i></div><strong id="dayPct">0%</strong></div><div class="progress-row"><span>MONTH</span><div class="bar"><i id="monthProgress"></i></div><strong id="monthPct">0%</strong></div><div class="progress-row"><span>YEAR</span><div class="bar"><i id="yearProgress"></i></div><strong id="yearPct">0%</strong></div></div>
-<div class="panel tools"><div class="section-title">TOOLS</div><div class="tool-display" id="toolDisplay">00:00:00.00</div><div class="tool-buttons"><button id="startStopwatch">START</button><button id="resetStopwatch">RESET</button></div><div class="tool-display small" id="timerDisplay">05:00</div><div class="tool-buttons"><button id="timerBtn">START 5M TIMER</button></div></div>
 </section>
-<section class="panel terminal"><div class="section-title">SYSTEM TELEMETRY</div><div class="telemetry"><span>NETWORK <b id="network">ONLINE</b></span><span>BATTERY <b id="battery">N/A</b></span><span>LANG <b id="lang">--</b></span><span>SCREEN <b id="screen">--</b></span></div></section>
+<section class="grid"><div class="panel tools"><div class="section-title">TOOLS</div><div class="tool-display" id="toolDisplay">00:00:00.00</div><div class="tool-buttons"><button id="startStopwatch">START</button><button id="resetStopwatch">RESET</button></div><div class="tool-display small" id="timerDisplay">05:00</div><div class="tool-buttons"><button id="timerBtn">START 5M TIMER</button></div></div><div class="panel terminal"><div class="section-title">SYSTEM TELEMETRY</div><div class="telemetry"><span>NETWORK <b id="network">ONLINE</b></span><span>BATTERY <b id="battery">N/A</b></span><span>LANG <b id="lang">--</b></span><span>SCREEN <b id="screen">--</b></span></div></div></section>
 <section class="panel heartbeat"><div class="pulse-line"><svg viewBox="0 0 600 80" preserveAspectRatio="none"><polyline points="0,40 90,40 105,40 115,20 125,60 140,40 205,40 220,40 235,12 250,68 265,40 340,40 355,40 370,20 380,60 395,40 470,40 485,40 500,10 515,70 530,40 600,40"/></svg></div><div class="pulse-label">HEARTBEAT // <span>STABLE</span></div></section>
-<section class="panel quote"><span id="quoteText"></span><span class="cursor">█</span></section>
-<section class="matrix panel"><canvas id="matrix"></canvas></section>
+<section class="bottom-row"><section class="panel quote"><span id="quoteText"></span><span class="cursor">█</span></section><section class="matrix panel"><canvas id="matrix"></canvas></section></section>
 </main>
-<footer><span>DECAFEMTO-369</span><span>v2.0</span><button id="fullscreenBtn">FULLSCREEN</button></footer>
-<div class="modal" id="settings"><div class="modal-box"><button class="close" id="closeSettings">×</button><h2>SETTINGS</h2><label>Matrix intensity <input id="matrixRange" type="range" min="1" max="5" value="3"></label><label>12/24 hour <select id="format"><option value="24">24 HOUR</option><option value="12">12 HOUR</option></select></label><button id="themeBtn">TOGGLE GREEN / AMBER</button></div></div>
-<script src="script.js"></script>
-</body></html>
+<footer><span>DECAFEMTO-369</span><span>v2.1 RADAR</span><button id="fullscreenBtn">FULLSCREEN</button></footer>
+<div class="modal" id="settings"><div class="modal-box"><button class="close" id="closeSettings">×</button><h2>SETTINGS</h2><label>Radar intensity <input id="matrixRange" type="range" min="1" max="5" value="3"></label><label>12/24 hour <select id="format"><option value="24">24 HOUR</option><option value="12">12 HOUR</option></select></label><button id="themeBtn">TOGGLE GREEN / AMBER</button></div></div>
+<script src="script.js"></script></body></html>
