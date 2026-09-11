@@ -2,13 +2,14 @@
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>Hacker Clock — DECAFEMTO-369</title><link rel="stylesheet" href="style.css"></head>
 <body>
+<header><div><span class="status-dot"></span> CLOCK // RADAR SYSTEM ONLINE</div><button id="settingsBtn" aria-label="Settings">⚙</button></header>
 <main>
 <section class="radar-section">
   <div class="radar-title">TIME RADAR <span id="timezone">--</span></div>
   <div class="clock-rack">
-    <article class="dial-unit"><div class="dial-heading">H O U R S</div><div class="radar-clock" id="hour-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="radar-hand hour-hand"></div><div class="center-dot"></div><div class="dial-value" id="hourValue">00</div></div></article>
-    <article class="dial-unit"><div class="dial-heading">M I N U T E S</div><div class="radar-clock" id="minute-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="radar-hand minute-hand"></div><div class="center-dot"></div><div class="dial-value" id="minuteValue">00</div></div></article>
-    <article class="dial-unit"><div class="dial-heading">S E C O N D S</div><div class="radar-clock" id="second-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="radar-hand second-hand"></div><div class="center-dot"></div><div class="dial-value" id="secondValue">00</div></div></article>
+    <article class="dial-unit"><div class="dial-heading">H O U R S</div><div class="radar-clock" id="hour-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="numbers"><span class="n12">12</span><span class="n3">3</span><span class="n6">6</span><span class="n9">9</span></div><div class="radar-hand hour-hand"></div><div class="center-dot"></div><div class="dial-value" id="hourValue">00</div></div></article>
+    <article class="dial-unit"><div class="dial-heading">M I N U T E S</div><div class="radar-clock" id="minute-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="numbers"><span class="n12">00</span><span class="n3">15</span><span class="n6">30</span><span class="n9">45</span></div><div class="radar-hand minute-hand"></div><div class="center-dot"></div><div class="dial-value" id="minuteValue">00</div></div></article>
+    <article class="dial-unit"><div class="dial-heading">S E C O N D S</div><div class="radar-clock" id="second-clock"><div class="sweep"></div><div class="radar-grid"></div><div class="numbers"><span class="n12">00</span><span class="n3">15</span><span class="n6">30</span><span class="n9">45</span></div><div class="radar-hand second-hand"></div><div class="center-dot"></div><div class="dial-value" id="secondValue">00</div></div></article>
   </div>
   <div class="calendar-readout"><span id="date">----</span><span class="weekday" id="weekday">----</span></div>
   <div class="year-label">Y E A R   P R O G R E S S</div><div class="year-bar"><i id="yearProgress"></i></div><div class="year-pct" id="yearPct">0%</div>
